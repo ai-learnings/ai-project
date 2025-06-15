@@ -11,12 +11,12 @@ class NewsArticle(BaseModel):
 
 # llm_config = LLMConfig(
 #     provider="openai/gpt-4o",  # Specify your LLM provider
-#     api_token="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"  # Provide your API token
+#     api_token=""  # Provide your API token
 # )
 
 llm_config = LLMConfig(
     provider="gemini/gemini-2.0-flash",  # Specify your LLM provider
-    api_token="AIzaSyCD8mM6LdsD6ykwS80myGk9N4MuknlVwOQ", # Provide your API token
+    api_token="", # Provide your API token
     base_url="https://generativelanguage.googleapis.com",
     max_tokens=100000
 )
