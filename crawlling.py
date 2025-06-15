@@ -10,10 +10,10 @@ class NewsArticle(BaseModel):
     description: str
 
 
-llm_config = LLMConfig(
-    provider="openai/gpt-4o",  # Specify your LLM provider
-    api_token=os.getenv("OPENAI_API_KEY")  # Provide your API token
-)
+# llm_config = LLMConfig(
+#     provider="openai/gpt-4o",  # Specify your LLM provider
+#     api_token=os.getenv("OPENAI_API_KEY")  # Provide your API token
+# )
 
 llm_config = LLMConfig(
     provider="gemini/gemini-2.0-flash",  # Specify your LLM provider
