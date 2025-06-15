@@ -1,6 +1,6 @@
 import json
 from typing import List, Sequence
-
+import os
 import voyageai
 
 from pymongo.mongo_client import MongoClient
@@ -9,14 +9,14 @@ from pymongo.server_api import ServerApi
 from ollama import Client
 
 # connect to your Atlas cluster
-uri = "mongodb+srv://vinudhaked456:WZx59qXKO1a2B3hg@clusterllm.kyreht8.mongodb.net/?retryWrites=true&w=majority&appName=ClusterLLM"
+uri = os.getenv("MONGO_DB_URI")  # e.g. "mongodb+srv://<username>:<password>@cluster.mongodb.net/test"
 mongoClient = MongoClient(uri, server_api=ServerApi('1'))
 mongoCollection = mongoClient["llm-vec-embeding-db"]["embeddings"]
 
 
 # To generate document embedings
 embedingModelName = "voyage-3.5"
-voClient = voyageai.Client(api_key="pa-MPM8CRqKQLOefAB1Us_GZeri6dE1gsdBszfeNlZv8TH")
+voClient = voyageai.Client(api_key=os.getenv("VOYAGEAI_API_KEY"))
 
 # embedingModelName = "mxbai-embed-large"
 # ollama = Client(

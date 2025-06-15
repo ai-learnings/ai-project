@@ -2,6 +2,7 @@ import json
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, DefaultMarkdownGenerator, CacheMode, LLMConfig, LLMContentFilter
 from pydantic import BaseModel
 import asyncio
+import os
 
 
 class NewsArticle(BaseModel):
@@ -9,14 +10,14 @@ class NewsArticle(BaseModel):
     description: str
 
 
-# llm_config = LLMConfig(
-#     provider="openai/gpt-4o",  # Specify your LLM provider
-#     api_token=""  # Provide your API token
-# )
+llm_config = LLMConfig(
+    provider="openai/gpt-4o",  # Specify your LLM provider
+    api_token=os.getenv("OPENAI_API_KEY")  # Provide your API token
+)
 
 llm_config = LLMConfig(
     provider="gemini/gemini-2.0-flash",  # Specify your LLM provider
-    api_token="", # Provide your API token
+    api_token=os.getenv("GENAI_API_KEY"), # Provide your API token
     base_url="https://generativelanguage.googleapis.com",
     max_tokens=100000
 )

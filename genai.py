@@ -7,17 +7,18 @@ from google.genai import types
 import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+import os
 
 
 # llm client
-llmClient = genai.Client(api_key="AIzaSyCD8mM6LdsD6ykwS80myGk9N4MuknlVwOQ")
+llmClient = genai.Client(api_key=os.getenv("GENAI_API_KEY"))
 # ollamaClient = Client(
 #     host="localhost:11434"
 # )
 
 
 # connect to your Atlas cluster
-uri = "mongodb+srv://vinudhaked456:WZx59qXKO1a2B3hg@clusterllm.kyreht8.mongodb.net/?retryWrites=true&w=majority&appName=ClusterLLM"
+uri = os.getenv("MONGO_DB_URI")  # e.g. "mongodb+srv://<username>:<password>@cluster.mongodb.net/test"
 mongoClient = MongoClient(uri, server_api=ServerApi('1'))
 mongoCollection = mongoClient["llm-vec-embeding-db"]["embeddings"]
 
@@ -25,7 +26,7 @@ mongoCollection = mongoClient["llm-vec-embeding-db"]["embeddings"]
 # To generate query embedings
 # embedingModelName = "mxbai-embed-large"   # mxbai-embed-large (ollama)
 embedingModelName = "voyage-3.5"   # voyageai
-vo = voyageai.Client(api_key="pa-MPM8CRqKQLOefAB1Us_GZeri6dE1gsdBszfeNlZv8TH")
+vo = voyageai.Client(api_key=os.getenv("VOYAGEAI_API_KEY"))
 
 
 # def embedQueryOllama(query:str) :
