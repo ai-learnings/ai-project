@@ -64,6 +64,9 @@ coverage.xml
 # VS Code
 .vscode/
 
+# Environment variables
+.env
+
 # Data and knowledge base
 /data/collecteddata/
 /data/knowedgebase/

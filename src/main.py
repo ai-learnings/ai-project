@@ -1,17 +1,21 @@
 from pydantic import BaseModel
 from typing import List
 import voyageai
+import google.generativeai as genai
+from google.generativeai import types
 from bson import json_util
-from google import genai
-from google.genai import types
 import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import os
+import base64
 
 
-# llm client
-llmClient = genai.Client(api_key=os.getenv("GENAI_API_KEY"))
+
+# Configure Gemini API key
+genai.configure(api_key=os.getenv("GENAI_API_KEY"))
+# Create Gemini model instance
+llmClient = genai.GenerativeModel("gemini-2.0-flash")
 # ollamaClient = Client(
 #     host="localhost:11434"
 # )
@@ -91,23 +95,8 @@ def generateFinalResponseUsingGemini(prom_data:str, user_query:str) -> AIRespons
         f"Make sure the response is strictly valid JSON."
     )
 
-    model = "gemini-2.0-flash"
-    contents = [
-        types.Content(
-            role="user",
-            parts=[types.Part.from_text(text=prompt)],
-        ),
-    ]
-
-    generate_content_config = types.GenerateContentConfig(response_mime_type="text/plain")
-
-    # Get full response
-    response = llmClient.models.generate_content(
-        model=model,
-        contents=contents,
-        config=generate_content_config,
-    )
-
+    # Get full response using Gemini API
+    response = llmClient.generate_content(prompt)
     full_text = response.text.strip()
 
     # Parse the JSON response safely
@@ -145,12 +134,21 @@ def generateFinalResponseUsingGemini(prom_data:str, user_query:str) -> AIRespons
 
 ######################################################################################################################
 if __name__ == "__main__":
-  userQuery = input("query: ")    # "who is president id dhaked firm."
-  print("\n")
-  queryVector = embedQueryVoyage(userQuery)
-  dbData = queryMongoDB(queryVector)
-  
-  dataString = ".".join(item.data for item in dbData)
-  answer = generateFinalResponseUsingGemini(dataString,userQuery)
-  print(answer)
+    import sys
+    if len(sys.argv) > 1:
+        userQuery = " ".join(sys.argv[1:])
+    else:
+        try:
+            userQuery = input("query: ") # who is president of dhaked firm.
+        except EOFError:
+            print("No query provided. Exiting.")
+            sys.exit(1)
+    print("\n")
+    queryVector = embedQueryVoyage(userQuery)
+    dbData = queryMongoDB(queryVector)
+    dataString = ".".join(item.data for item in dbData)
+    print(f"RAG Data to be used for assisting generation: {dataString}\n")
+    print(f"User Query: {userQuery}\n")
+    answer = generateFinalResponseUsingGemini(dataString, userQuery)
+    print(answer)
 
