@@ -28,3 +28,18 @@ OPENAI_API_KEY=<api-key>
 MONGO_DB_URI=<connection-url>
 VOYAGEAI_API_KEY=<api-key>
 ```
+
+## MongoDB indexes
+Search vector index:
+```
+{
+  "fields": [
+    {
+      "type": "vector",
+      "path": "data_embeded",
+      "numDimensions": 1024,
+      "similarity": "cosine"
+    }
+  ]
+}
+```
