@@ -1,17 +1,3 @@
-
-
-
-
-Add Env property
-
-# .env file for ai-project
-# Add your API keys and MongoDB URI here
-
-GENAI_API_KEY=<api-key>
-OPENAI_API_KEY=<api-key>
-MONGO_DB_URI=<connection-url>
-VOYAGEAI_API_KEY=<api-key>
-
 # AI Weather Information System
 
 This project aims to create an AI system that provides the latest weather information using advanced technologies:
