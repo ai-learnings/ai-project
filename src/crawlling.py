@@ -5,7 +5,9 @@ from pydantic import BaseModel, Field
 from typing import List
 from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode, LLMConfig, LLMContentFilter, DefaultMarkdownGenerator
 from crawl4ai.extraction_strategy import LLMExtractionStrategy
+from dotenv import load_dotenv
 
+load_dotenv()
 class NewsArticle(BaseModel):
     summary: str
 

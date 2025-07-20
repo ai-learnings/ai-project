@@ -8,8 +8,9 @@ import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import os
-import base64
+from dotenv import load_dotenv
 
+load_dotenv()
 
 
 # Configure Gemini API key

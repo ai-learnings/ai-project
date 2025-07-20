@@ -5,8 +5,9 @@ import voyageai
 
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from dotenv import load_dotenv
 
-from ollama import Client
+load_dotenv()
 
 # connect to your Atlas cluster
 uri = os.getenv("MONGO_DB_URI")  # e.g. "mongodb+srv://<username>:<password>@cluster.mongodb.net/test"
