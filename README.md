@@ -1,4 +1,4 @@
-# AI Weather Information System
+# AI Information System (python 3.13 required.)
 
 This project aims to create an AI system that provides the latest weather information using advanced technologies:
 
