@@ -3,7 +3,6 @@ from typing import List
 import voyageai
 import google.generativeai as genai
 from google.generativeai import types
-from bson import json_util
 import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi

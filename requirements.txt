@@ -3,7 +3,6 @@ voyageai==0.2.4
 google-generativeai==0.8.5
 crawl4ai==0.7.1
 ollama==0.5.1
-pymongo==4.13.0
+pymongo==4.13.2
 playwright==1.53.0
-bson==0.5.10
 python-dotenv==1.1.1
